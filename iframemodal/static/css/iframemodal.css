@@ -1,0 +1,9 @@
+/* CSS for IFrameModalXBlock */
+
+.iframemodal_block .count {
+    font-weight: bold;
+}
+
+.iframemodal_block p {
+    cursor: pointer;
+}

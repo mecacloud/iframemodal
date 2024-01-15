@@ -1,0 +1,13 @@
+setup.py
+iframemodal/__init__.py
+iframemodal/iframemodal.py
+iframemodal/static/README.txt
+iframemodal/static/css/iframemodal.css
+iframemodal/static/html/iframemodal.html
+iframemodal/static/js/src/iframemodal.js
+iframemodal_xblock.egg-info/PKG-INFO
+iframemodal_xblock.egg-info/SOURCES.txt
+iframemodal_xblock.egg-info/dependency_links.txt
+iframemodal_xblock.egg-info/entry_points.txt
+iframemodal_xblock.egg-info/requires.txt
+iframemodal_xblock.egg-info/top_level.txt
