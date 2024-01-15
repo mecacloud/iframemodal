@@ -4,9 +4,15 @@ import pkg_resources
 from web_fragments.fragment import Fragment
 from xblock.core import XBlock
 from xblock.fields import String, Scope
+try:
+    from xblock.utils.resources import ResourceLoader
+    from xblock.utils.studio_editable import StudioEditableXBlockMixin
+except ModuleNotFoundError:  # For backward compatibility with releases older than Quince.
+    from xblockutils.resources import ResourceLoader
+    from xblockutils.studio_editable import StudioEditableXBlockMixin
 
 
-class IFrameModalXBlock(XBlock):
+class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
     """
     TO-DO: document what your XBlock does.
     """
@@ -33,6 +39,14 @@ class IFrameModalXBlock(XBlock):
         """
         html = self.resource_string("static/html/iframemodal.html")
         frag = Fragment(html.format(self=self))
+        loader = ResourceLoader(__name__)
+        frag.add_content(
+            loader.render_django_template(
+                '/templates/html/lti_1p3_studio.html',
+                context,
+                i18n_service=self.runtime.service(self, 'i18n')
+            ),
+        )
         frag.add_css(self.resource_string("static/css/iframemodal.css"))
         frag.add_javascript(self.resource_string("static/js/src/iframemodal.js"))
         frag.initialize_js('IFrameModalXBlock')
