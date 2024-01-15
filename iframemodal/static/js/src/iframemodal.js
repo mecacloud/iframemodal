@@ -8,26 +8,19 @@ function IFrameModalXBlock(runtime, element) {
     // var handlerUrl = runtime.handlerUrl(element, 'increment_count');
 
     $('button[data-target]', element).click(function(eventObject) {
-        console.log(eventObject);
-        const overlay = $("<div id='my-iframe-modal_lean-overlay' class='lean-overlay'></div>");
-        $("body").append(overlay);
-        if (window !== window.parent) {
-          window.parent.postMessage(
-              {
-                  'type': 'plugin.modal',
-                  'payload': {
-                      'url': 'https://www.google.com',
-                      'title': 'title',
-                      'width': '400px'
-                  }
-              },
-              document.referrer
-          );
-          return;
-        }
+      const modalEle = $(`<div class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          DEMO
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+      </div>`)
+        $("body").append(modalEle);
+        
     });
 
     $(function ($) {
+      
         /* Here's where you'd do things on page load. */
         // $.fn.extend({
         //   iframeModal: function (options) {
