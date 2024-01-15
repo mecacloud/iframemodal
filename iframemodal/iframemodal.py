@@ -15,7 +15,7 @@ class IFrameModalXBlock(XBlock):
     # self.<fieldname>.
 
     # TO-DO: delete count, and define your own fields.
-    ifrome_url = String(
+    iframe_url = String(
         default='', scope=Scope.user_state,
         help="iframe URL",
     )

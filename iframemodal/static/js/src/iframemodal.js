@@ -2,10 +2,10 @@
 function IFrameModalXBlock(runtime, element) {
 
     function updateCount(result) {
-        $('.count', element).text(result.count);
+        // $('.count', element).text(result.count);
     }
 
-    var handlerUrl = runtime.handlerUrl(element, 'increment_count');
+    // var handlerUrl = runtime.handlerUrl(element, 'increment_count');
 
     $('button[data-target]', element).click(function(eventObject) {
         console.log(eventObject);
