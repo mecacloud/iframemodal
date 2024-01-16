@@ -6,7 +6,7 @@ from xblock.core import XBlock
 from xblock.fields import String, Scope
 
 
-class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
+class IFrameModalXBlock(XBlock):
     """
     TO-DO: document what your XBlock does.
     """
