@@ -1,24 +1,17 @@
 <div class="iframemodal_block">
   <div>
     <div>
-      <button
-          class="btn btn-pl-primary btn-base"
-          data-target="my-iframe-modal"
-      >
-          open <i class="icon fa fa-external-link"></i>
+      <button class="js-modal-trigger" data-target="modal-js-example">
+        Open JS example modal
       </button>
     </div>
-    <section
-        id="my-iframe-modal"
-        class="modal"
-        aria-hidden="true"
-    >
-        <div class="inner-wrapper" role="dialog">
-            <button class="close-modal">
-                <i class="icon fa fa-remove"></i>
-                <span class="sr">Close</span>
-            </button>
-            <iframe
+    <div id="modal-js-example" class="modal">
+      <div class="modal-background"></div>
+    
+      <div class="modal-content">
+        <div class="box">
+          <p>Modal JS example</p>
+          <iframe
               title="title"
               name="myIFrame-demo"
               src="{self.iframe_url}"
@@ -28,7 +21,10 @@
               allow="microphone *; camera *; midi *; geolocation *; encrypted-media *"
           ></iframe>
         </div>
-    </section>
+      </div>
+    
+      <button class="modal-close is-large" aria-label="close"></button>
+    </div>
   </div>
 
 </div>
