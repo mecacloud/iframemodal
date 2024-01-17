@@ -5,8 +5,7 @@ from web_fragments.fragment import Fragment
 from xblock.core import XBlock
 from xblock.fields import String, Scope
 
-
-class IFrameModalXBlock(XBlock):
+class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
     """
     TO-DO: document what your XBlock does.
     """
@@ -16,7 +15,7 @@ class IFrameModalXBlock(XBlock):
 
     # TO-DO: delete count, and define your own fields.
     iframe_url = String(
-        default='https://www.nectec.or.th', scope=Scope.user_state,
+        default='https://grafana.learning.app.meca.in.th/d/c303c3f8-8709-41db-91a9-806cd5ae3006/e0b980-e0b8a3-e0b8b5-e0b8a2-e0b899-e0b894-e0b8b5?orgId=1&amp;showCategory=Panel+options&amp;from=1695007267018&amp;to=1695028867018&amp;theme=light&amp;kiosk', scope=Scope.user_state,
         help="iframe URL",
     )
 

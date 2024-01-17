@@ -5,22 +5,19 @@
         Open JS example modal
       </button>
     </div>
-    <div id="modal-js-example" class="modal">
+    <div id="modal-js-example" class="modal" style="width: 80%; left: 10%; top: 10%; bottom: 10%; display: block; opacity: 1;">
       <div class="modal-background"></div>
-    
-      <div class="modal-content">
-        <div class="box">
-          <p>Modal JS example</p>
-          <iframe
-              title="title"
-              name="myIFrame-demo"
-              src="{self.iframe_url}"
-              allowfullscreen="true"
-              webkitallowfullscreen="true"
-              mozallowfullscreen="true"
-              allow="microphone *; camera *; midi *; geolocation *; encrypted-media *"
+      <div class="modal-content" style="width: 100%; height: 100%;">
+        <iframe
+          title="title"
+          name="myIFrame-demo"
+          src="{self.iframe_url}"
+          allowfullscreen="true"
+          webkitallowfullscreen="true"
+          mozallowfullscreen="true"
+          style="width: 100%; height: 100%;"
+          allow="microphone *; camera *; midi *; geolocation *; encrypted-media *"
           ></iframe>
-        </div>
       </div>
     
       <button class="modal-close is-large" aria-label="close"></button>
