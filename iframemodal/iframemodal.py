@@ -21,8 +21,10 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
 
     # TO-DO: delete count, and define your own fields.
     iframe_url = String(
-        default='https://grafana.learning.app.meca.in.th/d/c303c3f8-8709-41db-91a9-806cd5ae3006/e0b980-e0b8a3-e0b8b5-e0b8a2-e0b899-e0b894-e0b8b5?orgId=1&amp;showCategory=Panel+options&amp;from=1695007267018&amp;to=1695028867018&amp;theme=light&amp;kiosk', scope=Scope.user_state,
+        display_name="iframe URL",
+        default='',
         help="iframe URL",
+        scope=Scope.settings
     )
 
     def resource_string(self, path):

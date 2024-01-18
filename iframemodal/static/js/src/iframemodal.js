@@ -13,8 +13,7 @@ function IFrameModalXBlock(runtime, element) {
   }
 
     $('button[data-target]', element).click(function(eventObject) {
-      console.log(eventObject);
-      const modal_id = eventObject.target.data("target");
+      const modal_id = $(eventObject.target).data("target");
       const closeButton = $('.close-modal');
       const defaults = { top: 100, overlay: 0.5, closeButton: null };
       const overlay_id = (modal_id + '_lean-overlay').replace('#', '');
