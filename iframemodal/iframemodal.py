@@ -11,6 +11,7 @@ except ModuleNotFoundError:  # For backward compatibility with releases older th
     from xblockutils.resources import ResourceLoader
     from xblockutils.studio_editable import StudioEditableXBlockMixin
 
+@XBlock.wants('settings')
 class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
     """
     TO-DO: document what your XBlock does.
@@ -18,7 +19,8 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
 
     # Fields are defined on the class.  You can access them in your code as
     # self.<fieldname>.
-
+    
+    block_settings_key = 'iframe_modal'
     # TO-DO: delete count, and define your own fields.
     iframe_url = String(
         display_name="iframe URL",
@@ -40,7 +42,7 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
         """
         html = self.resource_string("static/html/iframemodal.html")
         frag = Fragment(html.format(self=self))
-        # frag.add_css(self.resource_string("static/css/bulma.min.css"))
+        frag.add_css(self.resource_string("static/css/lms.css"))
         frag.add_css(self.resource_string("static/css/iframemodal.css"))
         frag.add_javascript(self.resource_string("static/js/src/iframemodal.js"))
         frag.initialize_js('IFrameModalXBlock')
@@ -66,13 +68,13 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
         """A canned scenario for display in the workbench."""
         return [
             ("IFrameModalXBlock",
-             """<iframemodal/>
+             """<iframemodal display_name="iframe modal" />
              """),
             ("Multiple IFrameModalXBlock",
              """<vertical_demo>
-                <iframemodal/>
-                <iframemodal/>
-                <iframemodal/>
+                <iframemodal display_name="iframe modal" />
+                <iframemodal display_name="iframe modal" />
+                <iframemodal display_name="iframe modal" />
                 </vertical_demo>
              """),
         ]
