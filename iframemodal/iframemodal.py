@@ -38,7 +38,7 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
         """
         html = self.resource_string("static/html/iframemodal.html")
         frag = Fragment(html.format(self=self))
-        frag.add_css(self.resource_string("static/css/bulma.min.css"))
+        # frag.add_css(self.resource_string("static/css/bulma.min.css"))
         frag.add_css(self.resource_string("static/css/iframemodal.css"))
         frag.add_javascript(self.resource_string("static/js/src/iframemodal.js"))
         frag.initialize_js('IFrameModalXBlock')

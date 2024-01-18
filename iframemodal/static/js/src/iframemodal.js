@@ -1,65 +1,64 @@
 /* Javascript for IFrameModalXBlock. */
 function IFrameModalXBlock(runtime, element) {
 
-    function updateCount(result) {
-        // $('.count', element).text(result.count);
-    }
+  function close_modal(modal_id) {
+    const $modal = $(modal_id);
+    $('select, input, textarea, button, a').off('focus');
+    $("#" + overlay_id).fadeOut(200);
+    $modal.css({ "display": "none" });
+    $modal.attr('aria-hidden', true);
+    $modal.find('iframe').attr('src', '');
+    $('body').css('overflow', 'auto');
+    $('button[data-target]', element).focus();
+  }
 
-    // var handlerUrl = runtime.handlerUrl(element, 'increment_count');
+    $('button[data-target]', element).click(function(eventObject) {
 
-    // $('button[data-target]', element).click(function(eventObject) {
-    //   const modalEle = $(`<div class="modal is-active">
-    //     <div class="modal-background"></div>
-    //     <div class="modal-content">
-    //       <p class="image is-4by3">
-    //         <img src="https://bulma.io/images/placeholders/1280x960.png" alt="">
-    //       </p>
-    //     </div>
-    //     <button class="modal-close is-large" aria-label="close"></button>
-    //   </div>`)
-    //     $("body").append(modalEle);
-        
-    // });
-
-    $(function ($) {
-      function openModal($el) {
-        $el.classList.add('is-active');
-      }
-    
-      function closeModal($el) {
-        $el.classList.remove('is-active');
-      }
-    
-      function closeAllModals() {
-        (document.querySelectorAll('.modal') || []).forEach(($modal) => {
-          closeModal($modal);
-        });
-      }
-    
-      // Add a click event on buttons to open a specific modal
-      (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
-        const modal = $trigger.dataset.target;
-        const $target = document.getElementById(modal);
-    
-        $trigger.addEventListener('click', () => {
-          openModal($target);
-        });
+      const modal_id = eventObject.target.data("target");
+      const closeButton = $('.close-modal');
+      const defaults = { top: 100, overlay: 0.5, closeButton: null };
+      const overlay_id = (modal_id + '_lean-overlay').replace('#', '');
+      const overlay = $("<div id='" + overlay_id + "' class='lean-overlay'></div>");
+      $("body").append(overlay);
+      const $modal = $(modal_id);
+      $modal.find('iframe').attr('src', $modal.data('launch-url'));
+      $("#" + overlay_id).click(function () {
+          close_modal(modal_id)
       });
-    
-      // Add a click event on various child elements to close the parent modal
-      (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
-        const $target = $close.closest('.modal');
-    
-        $close.addEventListener('click', () => {
-          closeModal($target);
-        });
+      closeButton.click(function () {
+        close_modal(modal_id)
+      })
+      $("#" + overlay_id).css({ "display": "block", opacity: 0 });
+      $("#" + overlay_id).fadeTo(200, o.overlay);
+      $(modal_id).css({
+          "display": "block"
       });
-    
-      // Add a keyboard event to close all modals
+      $(modal_id).fadeTo(200, 1);
+      $(modal_id).attr('aria-hidden', false);
+      $('body').css('overflow', 'hidden');
+
+      eventObject.preventDefault();
+
+      /* Manage focus for modal dialog */
+      /* Set focus on close button */
+      closeButton.focus();
+
+      /* Redirect close button to iframe */
+      closeButton.on('keydown', function (e) {
+          if (e.which === 9) {
+              e.preventDefault();
+              // This is a workaround due to Firefox triggering focus calls oddly.
+              setTimeout(function () {
+                  $modal.find('iframe')[0].contentWindow.focus();
+              }, 1);
+          }
+      });
       document.addEventListener('keydown', (event) => {
         if (event.code === 'Escape') {
-          closeAllModals();
+          close_modal(modal_id)
         }
       });
     });
+
+    $(function ($) {});
 }

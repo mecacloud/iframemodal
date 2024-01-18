@@ -1,27 +1,25 @@
 <div class="iframemodal_block">
   <div>
     <div>
-      <button class="js-modal-trigger" data-target="modal-js-example">
-        Open JS example modal
+      <button class="btn btn-pl-primary btn-base" data-target="#modal-js-example">
+        Open modal
       </button>
     </div>
-    <div id="modal-js-example" class="modal" style="width: 80%; left: 10%; top: 10%; bottom: 10%; opacity: 1;">
-      <div class="modal-background lean-overlay"></div>
-      <div class="modal-content" style="width: 100%; height: 100%;">
-        <iframe
-          title="title"
-          name="myIFrame-demo"
-          src="{self.iframe_url}"
-          allowfullscreen="true"
-          webkitallowfullscreen="true"
-          mozallowfullscreen="true"
-          style="width: 100%; height: 100%;"
-          allow="microphone *; camera *; midi *; geolocation *; encrypted-media *"
-          ></iframe>
+    <section
+      id="modal-js-example" class="modal" aria-hidden="true"
+      style="width: 80%; left: 10%; top: 10%; bottom: 10%; opacity: 1;"
+      data-width="80%" data-launch-url="{self.iframe_url}">
+      <div class="inner-wrapper" role="dialog">
+        <button class="close-modal">
+            <i class="icon fa fa-remove"></i>
+            <span class="sr">Close</span>
+        </button>
+        <iframe title="title" class="ltiLaunchFrame" name="modal-js-example"
+          allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"
+          allow="microphone *; camera *; midi *; geolocation *; encrypted-media *"></iframe>
+
       </div>
-    
-      <button class="modal-close is-large" aria-label="close"></button>
-    </div>
+  </section>
   </div>
 
 </div>
