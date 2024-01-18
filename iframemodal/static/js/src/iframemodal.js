@@ -28,7 +28,7 @@ function IFrameModalXBlock(runtime, element) {
         close_modal(modal_id)
       })
       $("#" + overlay_id).css({ "display": "block", opacity: 0 });
-      $("#" + overlay_id).fadeTo(200, o.overlay);
+      $("#" + overlay_id).fadeTo(200, 0.5);
       $(modal_id).css({
           "display": "block"
       });
