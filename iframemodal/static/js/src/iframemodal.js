@@ -34,7 +34,7 @@ function IFrameModalXBlock(runtime, element) {
                 'payload': {
                     'url': launch_url,
                     'title': $modal.find('iframe').attr('title'),
-                    'width': '80%'
+                    'width': $modal.data('width')
                 }
             },
             document.referrer
