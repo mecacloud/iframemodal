@@ -17,11 +17,15 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
     TO-DO: document what your XBlock does.
     """
 
-    # Fields are defined on the class.  You can access them in your code as
-    # self.<fieldname>.
-    
-    block_settings_key = 'iframe_modal'
+    editable_fields = ('title', 'iframe_url')
+
     # TO-DO: delete count, and define your own fields.
+    title = String(
+        display_name="title",
+        default='',
+        help="title",
+        scope=Scope.settings
+    )
     iframe_url = String(
         display_name="iframe URL",
         default='',
@@ -47,10 +51,6 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
         frag.add_javascript(self.resource_string("static/js/src/iframemodal.js"))
         frag.initialize_js('IFrameModalXBlock')
         return frag
-    
-    @property
-    def editable_fields(self):
-        return tuple('iframe_url')
 
     # TO-DO: change this handler to perform your own actions.  You may need more
     # than one handler, or you may not need any handlers at all.
