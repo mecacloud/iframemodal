@@ -20,6 +20,28 @@ function IFrameModalXBlock(runtime, element) {
       const defaults = { top: 100, overlay: 0.5, closeButton: null };
       const overlay_id = 'lean_overlay';
       const $modal = $(modal_id);
+      
+
+      // If we are already in an iframe, skip creation of the modal, since
+      // it won't look good, anyway. Instead, we post a message to the parent
+      // window, requesting creation of a modal there.
+      // This is used by the courseware microfrontend.
+      if (window !== window.parent) {
+        var launch_url = $modal.data('launch-url');
+        window.parent.postMessage(
+            {
+                'type': 'plugin.modal',
+                'payload': {
+                    'url': launch_url,
+                    'title': $modal.find('iframe').attr('title'),
+                    'width': '80%'
+                }
+            },
+            document.referrer
+        );
+        return;
+    }
+
       $modal.find('iframe').attr('src', $modal.data('launch-url'));
       $("#" + overlay_id).click(function () {
           close_modal(modal_id)

@@ -21,15 +21,21 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
 
     # TO-DO: delete count, and define your own fields.
     title = String(
-        display_name="title",
+        display_name="Title",
         default='',
         help="title",
         scope=Scope.settings
     )
-    iframe_url = String(
-        display_name="iframe URL",
+    btn_text = String(
+        display_name="Button text",
         default='',
-        help="iframe URL",
+        help="Button text",
+        scope=Scope.settings
+    )
+    iframe_url = String(
+        display_name="IFrame URL",
+        default='',
+        help="IFrame URL display in modal",
         scope=Scope.settings
     )
 
