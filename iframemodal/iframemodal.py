@@ -17,7 +17,7 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
     TO-DO: document what your XBlock does.
     """
 
-    editable_fields = ('title', 'iframe_url')
+    editable_fields = ('title', 'iframe_url', 'btn_text')
 
     # TO-DO: delete count, and define your own fields.
     title = String(
