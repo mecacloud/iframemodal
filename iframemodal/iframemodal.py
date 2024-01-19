@@ -47,6 +47,10 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
         frag.add_javascript(self.resource_string("static/js/src/iframemodal.js"))
         frag.initialize_js('IFrameModalXBlock')
         return frag
+    
+    @property
+    def editable_fields(self):
+        return tuple('iframe_url')
 
     # TO-DO: change this handler to perform your own actions.  You may need more
     # than one handler, or you may not need any handlers at all.

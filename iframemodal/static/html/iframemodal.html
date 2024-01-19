@@ -7,14 +7,14 @@
     </div>
     <section
       id="modal-{self.scope_ids.def_id}" class="modal" aria-hidden="true"
-      style="width: 80%; left: 10%; top: 10%; bottom: 10%; opacity: 1;"
+      style="width: 80%; left: 10%; top: 10%; bottom: 10%; opacity: 1;z-index: 11000;"
       data-width="80%" data-launch-url="{self.iframe_url}">
-      <div class="inner-wrapper" role="dialog">
+      <div class="inner-wrapper" role="dialog" style="height: 100%; padding: 0 0 0 0;">
         <button class="close-modal">
             <i class="icon fa fa-remove"></i>
             <span class="sr">Close</span>
         </button>
-        <iframe title="title" class="ltiLaunchFrame" name="modal-{self.scope_ids.def_id}"
+        <iframe title="title" name="modal-{self.scope_ids.def_id}"
           allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"
           style="width: 100%; height: 100%;"
           allow="microphone *; camera *; midi *; geolocation *; encrypted-media *"></iframe>

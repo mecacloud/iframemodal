@@ -4,7 +4,7 @@ function IFrameModalXBlock(runtime, element) {
   function close_modal(modal_id) {
     const $modal = $(modal_id);
     $('select, input, textarea, button, a').off('focus');
-    const overlay_id = 'lean-overlay';
+    const overlay_id = 'lean_overlay';
     $("#" + overlay_id).fadeOut(200);
     $("#" + overlay_id).css({ "display": "none" });
     $modal.css({ "display": "none" });
@@ -18,7 +18,7 @@ function IFrameModalXBlock(runtime, element) {
       const modal_id = $(eventObject.target).data("target");
       const closeButton = $('.close-modal');
       const defaults = { top: 100, overlay: 0.5, closeButton: null };
-      const overlay_id = 'lean-overlay';
+      const overlay_id = 'lean_overlay';
       const $modal = $(modal_id);
       $modal.find('iframe').attr('src', $modal.data('launch-url'));
       $("#" + overlay_id).click(function () {
