@@ -8,10 +8,17 @@
         {self.btn_text}
       </button>
     </div>
+    {% if self.display == 'inline' %}
+    inline
+    {% elif self.display == 'modal' %}
+    modal
+    {% elif self.display == 'inline' %}
+    newWindow
+    {% endif %}
     <section
       id="modal-{self.scope_ids.def_id}" class="modal" aria-hidden="true"
-      style="width: 80%; left: 10%; top: 10%; bottom: 10%; opacity: 1;z-index: 11000; position: fixed;"
-      data-width="80%" data-launch-url="{self.iframe_url}">
+      style="width: {self.width}; left: 10%; top: 10%; bottom: 10%; opacity: 1;z-index: 11000; position: fixed;"
+      data-width="{self.width}" data-launch-url="{self.iframe_url}">
       <div class="inner-wrapper" role="dialog" style="height: 100%; padding: 0 0 0 0;">
         <button class="close-modal">
             <i class="icon fa fa-remove"></i>

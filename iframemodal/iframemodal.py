@@ -3,7 +3,7 @@
 import pkg_resources
 from web_fragments.fragment import Fragment
 from xblock.core import XBlock
-from xblock.fields import String, Scope
+from xblock.fields import String, Scope, Integer
 try:
     from xblock.utils.resources import ResourceLoader
     from xblock.utils.studio_editable import StudioEditableXBlockMixin
@@ -17,7 +17,7 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
     TO-DO: document what your XBlock does.
     """
 
-    editable_fields = ('title', 'iframe_url', 'btn_text')
+    editable_fields = ('title', 'iframe_url', 'btn_text', 'percentWidth', 'height', 'display')
 
     # TO-DO: delete count, and define your own fields.
     title = String(
@@ -28,7 +28,7 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
     )
     btn_text = String(
         display_name="Button text",
-        default='',
+        default='Button',
         help="Button text",
         scope=Scope.settings
     )
@@ -36,6 +36,29 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
         display_name="IFrame URL",
         default='',
         help="IFrame URL display in modal",
+        scope=Scope.settings
+    )
+    width = String(
+        display_name="Width",
+        default='80%',
+        help="Element Width",
+        scope=Scope.settings
+    )
+    height = String(
+        display_name="Height",
+        default='600',
+        help="Element Height",
+        scope=Scope.settings
+    )
+    display = String(
+        display_name="Height",
+        choices=[
+            ('inline', 'inline'),
+            ('modal', 'modal'),
+            ('newWindow', 'New Window')
+        ],
+        default='modal',
+        help="Element display option",
         scope=Scope.settings
     )
 
