@@ -53,9 +53,10 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
     display = String(
         display_name="Height",
         choices=[
-            ('inline', 'inline'),
-            ('modal', 'modal'),
-            ('newWindow', 'New Window')
+            ('inline', 'Embedded inline'),
+            ('modal', 'Open modal by button'),
+            ('modalWithInline', 'Embedded inline with modal'),
+            ('newWindow', 'Open new window by button')
         ],
         default='modal',
         help="Element display option",
@@ -69,7 +70,7 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
 
     def _get_context_for_template(self):
         return {
-            'element_id': self.scope_ids.def_id,
+            'element_id': str(self.scope_ids.usage_id),
             'title': self.title,
             'btn_text': self.btn_text,
             'iframe_url': self.iframe_url,
