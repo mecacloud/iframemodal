@@ -67,14 +67,27 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
         data = pkg_resources.resource_string(__name__, path)
         return data.decode("utf8")
 
+    def _get_context_for_template(self):
+        return {
+            'element_id': self.scope_ids.def_id,
+            'title': self.title,
+            'btn_text': self.btn_text,
+            'iframe_url': self.iframe_url,
+            'width': self.width,
+            'height': self.height,
+            'display': self.display,
+        }
+
     # TO-DO: change this view to display your data your own way.
     def student_view(self, context=None):
         """
         The primary view of the IFrameModalXBlock, shown to students
         when viewing courses.
         """
-        html = self.resource_string("static/html/iframemodal.html")
-        frag = Fragment(html.format(self=self))
+        context = self._get_context_for_template()
+        loader = ResourceLoader(__name__)
+        frag = Fragment()
+        frag.add_content(loader.render_mako_template('/templates/student.html', context))
         # frag.add_css(self.resource_string("static/css/lms.css"))
         frag.add_css(self.resource_string("static/css/iframemodal.css"))
         frag.add_javascript(self.resource_string("static/js/src/iframemodal.js"))
