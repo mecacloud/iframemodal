@@ -34,27 +34,34 @@ function IFrameModalXBlock(runtime, element) {
       );
       return;
     }
-    
-    const closeButton = $('<button>');
+    const innerWrapper = $('<div>');
+    innerWrapper.addClass('inner-wrapper');
+    innerWrapper.attr('role', 'dialog');
+    innerWrapper.css({height: '100%', padding: '0 0 0 0'});
+    let closeButton = $('<button>');
     closeButton.addClass('close-modal');
     closeButton.append('<i class="icon fa fa-remove"></i>');
-    closeButton.append('<span class="sr">Close</span>')
+    closeButton.append('<span class="sr">Close</span>');
+    let modal = $('<section>');
+    modal.addClass('modal');
+    modal.attr('aria-hidden', 'true');
+    modal.css({width: wrapper.data('width'), left: '10%', top: '10%', bottom: '10%', opacity: 1, zIndex: 11000, position: 'fixed', display: 'block'});
     const defaults = { top: 100, overlay: 0.5, closeButton: null };
     const overlay_id = 'lean_overlay';
     const iframe = createIframeElelment(wrapper);
+    innerWrapper.append(closeButton);
+    innerWrapper.append(iframe);
+    modal.append(innerWrapper);
     $("#" + overlay_id).click(function () {
-        close_modal(modal_id)
+        close_modal(modal)
     });
     closeButton.click(function () {
-      close_modal(modal_id)
+      close_modal(modal)
     })
     $("#" + overlay_id).css({ "display": "block", opacity: 0 });
     $("#" + overlay_id).fadeTo(200, 0.5);
-    $(modal_id).css({
-        "display": "block"
-    });
-    $(modal_id).fadeTo(200, 1);
-    $(modal_id).attr('aria-hidden', false);
+    modal.fadeTo(200, 1);
+    modal.attr('aria-hidden', false);
     $('body').css('overflow', 'hidden');
 
     eventObject.preventDefault();
@@ -69,13 +76,13 @@ function IFrameModalXBlock(runtime, element) {
             e.preventDefault();
             // This is a workaround due to Firefox triggering focus calls oddly.
             setTimeout(function () {
-                $modal.find('iframe')[0].contentWindow.focus();
+                modal.find('iframe')[0].contentWindow.focus();
             }, 1);
         }
     });
     document.addEventListener('keydown', (event) => {
       if (event.code === 'Escape') {
-        close_modal(modal_id)
+        close_modal(modal)
       }
     });
   }
@@ -86,20 +93,19 @@ function IFrameModalXBlock(runtime, element) {
     newWindow.addEventListener('message', console.log);
   }
 
-  function close_modal(modal_id) {
-    const $modal = $(modal_id);
+  function close_modal(modal) {
     $('select, input, textarea, button, a').off('focus');
     const overlay_id = 'lean_overlay';
     $("#" + overlay_id).fadeOut(200);
     $("#" + overlay_id).css({ "display": "none" });
-    $modal.css({ "display": "none" });
-    $modal.attr('aria-hidden', true);
-    $modal.find('iframe').attr('src', '');
+    modal.css({ "display": "none" });
+    modal.attr('aria-hidden', true);
+    modal.find('iframe').attr('src', '');
     $('body').css('overflow', 'auto');
-    $('button[data-target]', element).focus();
   }
 
     $(function ($) {
+      const wrapper = $(element).find('.wrapper');
       if (wrapper.data('display') === 'inline') {
         wrapper.append(createIframeElelment(wrapper));
       } else if (wrapper.data('display') === 'modal') {
