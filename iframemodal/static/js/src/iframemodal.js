@@ -18,7 +18,7 @@ function IFrameModalXBlock(runtime, element) {
   }
 
   function handleOpenModalButtonClick(eventObject) {
-    const wrapper = $(eventObject.target.parent);
+    const wrapper = $(eventObject.target).parent();
     if (window !== window.parent) {
       window.parent.addEventListener('message', console.log)
       window.parent.postMessage(
@@ -52,6 +52,7 @@ function IFrameModalXBlock(runtime, element) {
     innerWrapper.append(closeButton);
     innerWrapper.append(iframe);
     modal.append(innerWrapper);
+    wrapper.append(modal);
     $("#" + overlay_id).click(function () {
         close_modal(modal)
     });
