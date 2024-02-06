@@ -51,12 +51,12 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
         scope=Scope.settings
     )
     display = String(
-        display_name="Height",
-        choices=[
-            ('inline', 'Embedded inline'),
-            ('modal', 'Open modal by button'),
-            ('modalWithInline', 'Embedded inline with modal'),
-            ('newWindow', 'Open new window by button')
+        display_name="Display mode",
+        values=[
+            {"value": 'inline', "display_name": 'Embedded inline'},
+            {"value": 'modal', "display_name": 'Open modal by button'},
+            {"value": 'modalWithInline', "display_name": 'Embedded inline with modal'},
+            {"value": 'newWindow', "display_name": 'Open new window by button'}
         ],
         default='modal',
         help="Element display option",
