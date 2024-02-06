@@ -20,7 +20,7 @@ function IFrameModalXBlock(runtime, element) {
   function handleOpenModalButtonClick(eventObject) {
     const wrapper = $(eventObject.target).parent();
     if (window !== window.parent) {
-      window.parent.addEventListener('message', console.log)
+      // window.parent.addEventListener('message', console.log)
       window.parent.postMessage(
           {
               'type': 'plugin.modal',
