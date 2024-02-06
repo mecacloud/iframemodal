@@ -85,10 +85,8 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
         The primary view of the IFrameModalXBlock, shown to students
         when viewing courses.
         """
-        context = self._get_context_for_template()
-        loader = ResourceLoader(__name__)
-        frag = Fragment()
-        frag.add_content(loader.render_mako_template('/templates/student.html', context))
+        html = self.resource_string("static/html/iframemodal.html")
+        frag = Fragment(html.format(self=self))
         # frag.add_css(self.resource_string("static/css/lms.css"))
         frag.add_css(self.resource_string("static/css/iframemodal.css"))
         frag.add_javascript(self.resource_string("static/js/src/iframemodal.js"))
