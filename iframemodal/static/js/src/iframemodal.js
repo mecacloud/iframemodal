@@ -27,7 +27,7 @@ function IFrameModalXBlock(runtime, element) {
               'payload': {
                   'url': wrapper.data('iframe-url'),
                   'title': wrapper.data('title'),
-                  'width': $modal.data('width')
+                  'width': wrapper.data('width')
               }
           },
           document.referrer
