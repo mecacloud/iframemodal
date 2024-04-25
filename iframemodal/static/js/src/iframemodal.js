@@ -14,7 +14,8 @@ function IFrameModalXBlock(runtime, element) {
       width: '100%',
       height: '100%'
     });
-    iframe.on('message', console.log)
+    iframe.on('message', console.log);
+    return iframe;
   }
 
   function handleOpenModalButtonClick(eventObject) {

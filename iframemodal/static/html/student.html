@@ -3,7 +3,9 @@
     <h2 class="problem-header">
       {self.title}
     </h2>
-    <div data-target="{self.scope_ids.usage_id}"
+    <div 
+      data-scope-ids="{self.scope_ids}"
+      data-target="{self.scope_ids.def_id}"
       data-display="{self.display}"
       data-btn-text="{self.btn_text}"
       data-iframe-url="{self.iframe_url}"

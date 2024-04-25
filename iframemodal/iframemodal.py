@@ -26,6 +26,18 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
         help="title",
         scope=Scope.settings
     )
+    aetool = String(
+        display_name="AE Tool",
+        choices=[
+            ('simulator', 'Simulator'),
+            ('chatbot', 'Chatbot'),
+            ('bookroll', 'Bookroll'),
+            ('iframe', 'External URL')
+        ],
+        default='iframe',
+        help="Select AE Tool",
+        scope=Scope.settings
+    )
     btn_text = String(
         display_name="Button text",
         default='Button',
@@ -70,6 +82,7 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
 
     def _get_context_for_template(self):
         return {
+            'scope_ids': self.scope_ids,
             'element_id': str(self.scope_ids.usage_id),
             'title': self.title,
             'btn_text': self.btn_text,
