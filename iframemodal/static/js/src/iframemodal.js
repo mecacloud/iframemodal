@@ -1,18 +1,23 @@
 /* Javascript for IFrameModalXBlock. */
 function IFrameModalXBlock(runtime, element) {
   function createIframeElelment(wrapper) {
+    const params = [
+      `userId=${encodeURIComponent(wrapper.data('user-id'))}`,
+      `definitionId=${encodeURIComponent(wrapper.data('definition-id'))}`,
+      `usageId=${encodeURIComponent(wrapper.data('usage-id'))}`,
+    ]
     const iframe = $('<iframe>').attr({
       title: wrapper.data('title'),
       name: `iframe-${wrapper.data('target')}`,
       id: `iframe-${wrapper.data('target')}`,
-      src: wrapper.data('iframe-url'),
+      src: `${wrapper.data('iframe-url')}?${params.join('&')}` ,
       allowfullscreen: "true",
       webkitallowfullscreen: "true",
       mozallowfullscreen: "true",
       allow: "microphone *; camera *; midi *; geolocation *; encrypted-media *"
     }).css({
-      width: '100%',
-      height: '100%'
+      width: wrapper.data('width') || '100%',
+      height: wrapper.data('height') || '100%'
     });
     iframe.on('message', console.log);
     return iframe;
