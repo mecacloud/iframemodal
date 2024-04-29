@@ -14,6 +14,7 @@ except ModuleNotFoundError:  # For backward compatibility with releases older th
     from xblockutils.studio_editable import StudioEditableXBlockMixin
 
 @XBlock.wants('settings')
+@XBlock.wants('user')
 class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
     """
     TO-DO: document what your XBlock does.
@@ -77,6 +78,23 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
         scope=Scope.settings
     )
 
+    @property
+    def lms_role(self):
+        """
+        Get system user role.
+        """
+        user = self.runtime.service(self, 'user').get_current_user()
+        return user.opt_attrs.get('edx-platform.user_role', 'student')
+
+    @property
+    def lms_user_name(self):
+        """
+        Returns the edx-platform database user id for the current user.
+        """
+        username = self.runtime.service(self, 'user').get_current_user().opt_attrs.get(
+            'edx-platform.username', '')
+        return username
+
     def resource_string(self, path):
         """Handy helper for getting resources from our kit."""
         data = pkg_resources.resource_string(__name__, path)
@@ -93,15 +111,6 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
             'height': self.height,
             'display': self.display,
         }
-
-    @property
-    def lms_user_id(self):
-        """
-        Returns the edx-platform database user id for the current user.
-        """
-        user_id = self.runtime.service(self, 'user').get_current_user().opt_attrs.get(
-            'edx-platform.user_id', None)
-        return user_id
 
     # TO-DO: change this view to display your data your own way.
     def student_view(self, context=None):
