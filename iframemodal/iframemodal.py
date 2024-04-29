@@ -4,6 +4,8 @@ import pkg_resources
 from web_fragments.fragment import Fragment
 from xblock.core import XBlock
 from xblock.fields import String, Scope, Integer
+from django.db.models import Q
+# from common.djangoapps.third_party_auth.api.utils import filter_user_social_auth_queryset_by_provider
 try:
     from xblock.utils.resources import ResourceLoader
     from xblock.utils.studio_editable import StudioEditableXBlockMixin
@@ -17,7 +19,7 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
     TO-DO: document what your XBlock does.
     """
 
-    editable_fields = ('title', 'iframe_url', 'btn_text', 'width', 'height', 'display')
+    editable_fields = ('title', 'aetool', 'iframe_url', 'btn_text', 'width', 'height', 'display')
 
     # TO-DO: delete count, and define your own fields.
     title = String(
@@ -91,6 +93,15 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
             'height': self.height,
             'display': self.display,
         }
+
+    @property
+    def lms_user_id(self):
+        """
+        Returns the edx-platform database user id for the current user.
+        """
+        user_id = self.runtime.service(self, 'user').get_current_user().opt_attrs.get(
+            'edx-platform.user_id', None)
+        return user_id
 
     # TO-DO: change this view to display your data your own way.
     def student_view(self, context=None):
