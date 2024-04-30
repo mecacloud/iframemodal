@@ -1,8 +1,11 @@
 /* Javascript for IFrameModalXBlock. */
 function IFrameModalXBlock(runtime, element) {
   function createIframeElelment(wrapper) {
+    const username = wrapper.data('user-name');
+    const userrole = wrapper.data('user-role');
     const params = [
-      `userId=${encodeURIComponent(wrapper.data('user-id'))}`,
+      `userName=${username}`,
+      `userRole=${userrole}`,
       `definitionId=${encodeURIComponent(wrapper.data('definition-id'))}`,
       `usageId=${encodeURIComponent(wrapper.data('usage-id'))}`,
     ]
@@ -27,11 +30,19 @@ function IFrameModalXBlock(runtime, element) {
     const wrapper = $(eventObject.target).parent();
     if (window !== window.parent) {
       // window.parent.addEventListener('message', console.log)
+      const username = wrapper.data('user-name');
+      const userrole = wrapper.data('user-role');
+      const params = [
+        `userName=${username}`,
+        `userRole=${userrole}`,
+        `definitionId=${encodeURIComponent(wrapper.data('definition-id'))}`,
+        `usageId=${encodeURIComponent(wrapper.data('usage-id'))}`,
+      ]
       window.parent.postMessage(
           {
               'type': 'plugin.modal',
               'payload': {
-                  'url': wrapper.data('iframe-url'),
+                  'url': `${wrapper.data('iframe-url')}?${params.join('&')}`,
                   'title': wrapper.data('title'),
                   'width': wrapper.data('width')
               }
@@ -54,7 +65,7 @@ function IFrameModalXBlock(runtime, element) {
     modal.css({width: wrapper.data('width'), left: '10%', top: '10%', bottom: '10%', opacity: 1, zIndex: 11000, position: 'fixed', display: 'block'});
     const defaults = { top: 100, overlay: 0.5, closeButton: null };
     const overlay_id = 'lean_overlay';
-    const iframe = createIframeElelment(wrapper);
+    const iframe = createIframeElelment(wrapper)
     innerWrapper.append(closeButton);
     innerWrapper.append(iframe);
     modal.append(innerWrapper);
