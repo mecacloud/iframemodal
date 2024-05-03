@@ -8,6 +8,7 @@ function IFrameModalXBlock(runtime, element) {
       `userRole=${userrole}`,
       `definitionId=${encodeURIComponent(wrapper.data('definition-id'))}`,
       `usageId=${encodeURIComponent(wrapper.data('usage-id'))}`,
+      `view=${wrapper.data('view')}`,
     ]
     const iframe = $('<iframe>').attr({
       title: wrapper.data('title'),
@@ -37,6 +38,7 @@ function IFrameModalXBlock(runtime, element) {
         `userRole=${userrole}`,
         `definitionId=${encodeURIComponent(wrapper.data('definition-id'))}`,
         `usageId=${encodeURIComponent(wrapper.data('usage-id'))}`,
+        `view=${wrapper.data('view')}`,
       ]
       window.parent.postMessage(
           {
