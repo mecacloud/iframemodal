@@ -126,7 +126,7 @@ class IFrameModalXBlock(StudioEditableXBlockMixin, XBlock):
         frag.initialize_js('IFrameModalXBlock')
         return frag
     
-    def studio_view(self, context=None):
+    def author_view(self, context=None):
         """
         The primary view of the IFrameModalXBlock, shown to students
         when viewing courses.
